@@ -1,5 +1,7 @@
 -- script_insertion.sql
 
+USE trouve_ton_artisan;
+
 -- Insertion des catégories
 INSERT INTO categorie (id_categorie, nom_categorie) VALUES (1, 'Alimentation');
 INSERT INTO categorie (id_categorie, nom_categorie) VALUES (2, 'Bâtiment');
@@ -23,7 +25,7 @@ INSERT INTO specialite (id_specialite, nom_specialite, id_categorie) VALUES (13,
 INSERT INTO specialite (id_specialite, nom_specialite, id_categorie) VALUES (14, 'Traiteur', 1);
 INSERT INTO specialite (id_specialite, nom_specialite, id_categorie) VALUES (15, 'Webdesign', 4);
 
--- Pour éviter un roman dans le script, on met un texte standard
+-- Texte standard pour a_propos raccourci
 SET @txt := 'Texte de présentation de l''artisan.';
 
 -- Insertion des artisans

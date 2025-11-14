@@ -1,3 +1,4 @@
+// models/Artisan.js
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/database");
 
@@ -9,36 +10,59 @@ const Artisan = sequelize.define(
       autoIncrement: true,
       primaryKey: true
     },
+
+    // nom VARCHAR(150) NOT NULL
     nom: {
+      type: DataTypes.STRING(150),
+      allowNull: false
+    },
+
+    // note DECIMAL(2,1) NOT NULL
+    note: {
+      type: DataTypes.DECIMAL(2, 1),
+      allowNull: false
+    },
+
+    // ville VARCHAR(100) NOT NULL
+    ville: {
       type: DataTypes.STRING(100),
       allowNull: false
     },
-    prenom: {
-      type: DataTypes.STRING(100),
+
+    // a_propos TEXT NOT NULL
+    a_propos: {
+      type: DataTypes.TEXT,
       allowNull: false
     },
+
+    // email VARCHAR(255) NOT NULL UNIQUE
     email: {
-      type: DataTypes.STRING(191),
+      type: DataTypes.STRING(255),
       allowNull: false,
       unique: true
     },
-    telephone: {
-      type: DataTypes.STRING(20),
+
+    // site_web VARCHAR(255) NULL
+    site_web: {
+      type: DataTypes.STRING(255),
       allowNull: true
     },
-    ville: {
-      type: DataTypes.STRING(100),
-      allowNull: true
+
+    // top TINYINT(1) NOT NULL DEFAULT 0
+    top: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
     },
-    code_postal: {
-      type: DataTypes.STRING(10),
-      allowNull: true
-    },
-    description: {
-      type: DataTypes.TEXT,
-      allowNull: true
-    },
+
+    // id_specialite INT UNSIGNED NOT NULL
     id_specialite: {
+      type: DataTypes.INTEGER.UNSIGNED,
+      allowNull: false
+    },
+
+    // id_categorie INT UNSIGNED NOT NULL
+    id_categorie: {
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false
     }

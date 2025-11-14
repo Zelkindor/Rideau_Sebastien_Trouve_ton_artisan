@@ -1,0 +1,35 @@
+// controllers/artisans.controller.js
+const artisansService = require("../services/artisans.service");
+
+exports.getArtisans = async (req, res) => {
+  try {
+    const {
+      id_categorie,
+      id_specialite,
+      ville,
+      search,
+      top,
+      min_note,
+      page = 1,
+      limit = 10
+    } = req.query;
+
+    const result = await artisansService.getArtisans({
+      id_categorie,
+      id_specialite,
+      ville,
+      search,
+      top,
+      min_note,
+      page,
+      limit
+    });
+
+    res.json(result);
+  } catch (error) {
+    console.error("Erreur GET /artisans :", error);
+    res.status(500).json({
+      error: "Erreur serveur lors de la récupération des artisans"
+    });
+  }
+};
