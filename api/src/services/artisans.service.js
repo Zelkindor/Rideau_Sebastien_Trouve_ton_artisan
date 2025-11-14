@@ -1,4 +1,3 @@
-// services/artisans.service.js
 const { Op } = require("sequelize");
 const { Artisan, Specialite, Categorie } = require("../models");
 
@@ -96,4 +95,27 @@ exports.getArtisans = async (params) => {
     limit: limitInt,
     data: rows
   };
+};
+
+exports.getArtisanById = async (id) => {
+  const artisan = await Artisan.findByPk(id, {
+    include: [
+      {
+        model: Specialite,
+        as: "specialite",
+        include: [
+          {
+            model: Categorie,
+            as: "categorie"
+          }
+        ]
+      },
+      {
+        model: Categorie,
+        as: "categorie"
+      }
+    ]
+  });
+
+  return artisan; // null si non trouvé, géré dans le controller
 };
