@@ -1,3 +1,4 @@
+// models/MessageContact.js
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/database");
 
@@ -9,25 +10,41 @@ const MessageContact = sequelize.define(
       autoIncrement: true,
       primaryKey: true
     },
-    nom: {
-      type: DataTypes.STRING(100),
+
+    // nom_expediteur VARCHAR(150) NOT NULL
+    nom_expediteur: {
+      type: DataTypes.STRING(150),
       allowNull: false
     },
-    email: {
-      type: DataTypes.STRING(191),
+
+    // email_expediteur VARCHAR(255) NOT NULL
+    email_expediteur: {
+      type: DataTypes.STRING(255),
       allowNull: false
     },
-    telephone: {
-      type: DataTypes.STRING(20),
-      allowNull: true
-    },
-    contenu: {
+
+    // contenu_message TEXT NOT NULL
+    contenu_message: {
       type: DataTypes.TEXT,
       allowNull: false
     },
+
+    // id_artisan INT UNSIGNED NULL
     id_artisan: {
       type: DataTypes.INTEGER.UNSIGNED,
-      allowNull: true // message facultativement lié à un artisan
+      allowNull: true
+    },
+
+    // id_specialite INT UNSIGNED NULL
+    id_specialite: {
+      type: DataTypes.INTEGER.UNSIGNED,
+      allowNull: true
+    },
+
+    // id_categorie INT UNSIGNED NULL
+    id_categorie: {
+      type: DataTypes.INTEGER.UNSIGNED,
+      allowNull: true
     }
   },
   {
