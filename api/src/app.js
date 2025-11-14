@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const helmet = require("helmet");
+const { sequelize } = require("./models");
 
 const app = express();
 
@@ -12,6 +13,17 @@ app.use(express.json());
 // Route de test
 app.get("/health", (req, res) => {
   res.json({ status: "ok", message: "API Trouve ton artisan opérationnelle" });
+});
+
+// Route de test DB
+app.get("/health/db", async (req, res) => {
+  try {
+    await sequelize.authenticate();
+    res.json({ status: "ok", db: "connected" });
+  } catch (error) {
+    console.error("Erreur /health/db :", error);
+    res.status(500).json({ status: "error", db: "disconnected" });
+  }
 });
 
 module.exports = app;
