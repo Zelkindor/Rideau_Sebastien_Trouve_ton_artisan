@@ -20,24 +20,72 @@ async function fetchJson(path, options = {}) {
   return response.json();
 }
 
-export async function getArtisans() {
-  const result = await fetchJson("/artisans");
+// Liste des artisans avec filtres SERVEUR (catégorie / spécialité uniquement)
+export async function getArtisans(filters = {}) {
+  const params = new URLSearchParams();
+
+  if (filters.categoryId) {
+    params.append("categoryId", filters.categoryId);
+  }
+
+  if (filters.specialiteId) {
+    params.append("specialiteId", filters.specialiteId);
+  }
+
+  const queryString = params.toString();
+  const path = queryString ? `/artisans?${queryString}` : "/artisans";
+
+  const result = await fetchJson(path);
 
   if (Array.isArray(result)) {
     return result;
   }
-  if (Array.isArray(result.data)) {
+
+  if (result && Array.isArray(result.data)) {
     return result.data;
   }
+
+  if (result && Array.isArray(result.artisans)) {
+    return result.artisans;
+  }
+
   return [];
 }
 
+// Détail d'un artisan
 export async function getArtisanById(id) {
   const result = await fetchJson(`/artisans/${id}`);
 
-  if (result && result.data) {
+  if (!result) {
+    return null;
+  }
+
+  if (result.data) {
     return result.data;
   }
 
+  if (result.artisan) {
+    return result.artisan;
+  }
+
   return result;
+}
+
+// Liste des catégories
+export async function getCategories() {
+  const result = await fetchJson("/categories");
+
+  if (Array.isArray(result)) {
+    return result;
+  }
+
+  if (result && Array.isArray(result.data)) {
+    return result.data;
+  }
+
+  if (result && Array.isArray(result.categories)) {
+    return result.categories;
+  }
+
+  return [];
 }
