@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const helmet = require("helmet");
 const { sequelize } = require("./models");
+const categoriesRoutes = require("./routes/categories.routes");
 
 const app = express();
 
@@ -9,6 +10,7 @@ const app = express();
 app.use(helmet());
 app.use(cors());
 app.use(express.json());
+app.use("/categories", categoriesRoutes);
 
 // Route de test
 app.get("/health", (req, res) => {
