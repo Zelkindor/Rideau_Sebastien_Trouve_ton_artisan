@@ -1,3 +1,5 @@
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "../pages/Home";
 import ListArtisans from "../pages/ListArtisans";
@@ -9,14 +11,20 @@ import NotFound from "../pages/NotFound";
 export default function AppRouter() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/artisans" element={<ListArtisans />} />
-        <Route path="/artisans/:id" element={<ArtisanDetail />} />
-        <Route path="/mentions-legales" element={<MentionsLegales />} />
-        <Route path="/politique-confidentialite" element={<PolitiqueConfidentialite />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+      <Header />
+      
+      <main className="container py-4">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/artisans" element={<ListArtisans />} />
+          <Route path="/artisans/:id" element={<ArtisanDetail />} />
+          <Route path="/mentions-legales" element={<MentionsLegales />} />
+          <Route path="/politique-confidentialite" element={<PolitiqueConfidentialite />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </main>
+
+      <Footer />
     </BrowserRouter>
   );
 }
