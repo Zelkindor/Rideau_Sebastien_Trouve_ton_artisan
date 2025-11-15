@@ -7,6 +7,7 @@ body {
   color: #212529;
 }
 
+/* On laisse Bootstrap gérer les largeurs, pas de max-width ni text-align général */
 #root {
   min-height: 100vh;
 }
