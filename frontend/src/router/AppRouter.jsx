@@ -7,6 +7,7 @@ import ArtisanDetail from "../pages/ArtisanDetail";
 import MentionsLegales from "../pages/MentionsLegales";
 import PolitiqueConfidentialite from "../pages/PolitiqueConfidentialite";
 import NotFound from "../pages/NotFound";
+import Contact from "../pages/Contact";
 
 export default function AppRouter() {
   return (
@@ -20,6 +21,7 @@ export default function AppRouter() {
           <Route path="/artisans/:id" element={<ArtisanDetail />} />
           <Route path="/mentions-legales" element={<MentionsLegales />} />
           <Route path="/politique-confidentialite" element={<PolitiqueConfidentialite />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
