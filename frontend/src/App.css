@@ -1,42 +1,91 @@
+/* === GLOBAL === */
+body {
+  margin: 0;
+  font-family: "Graphik", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  background-color: #ffffff;
+  color: #212529;
+}
+
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  min-height: 100vh;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* === HERO SECTION === */
+.home-hero {
+  background: linear-gradient(135deg, #e6efff, #ffffff);
+  padding: 80px 0;
+  margin-bottom: 40px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.home-hero-title {
+  font-weight: 700;
+  font-size: 2.6rem;
+  margin-bottom: 20px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.home-hero-subtitle {
+  max-width: 600px;
+  color: #555;
+  margin-bottom: 30px;
+  font-size: 1.1rem;
 }
 
-.card {
-  padding: 2em;
+/* === STEPS === */
+.home-how {
+  margin-top: 40px;
+  margin-bottom: 40px;
 }
 
-.read-the-docs {
-  color: #888;
+.home-section-title {
+  font-weight: 600;
+}
+
+.home-step-card {
+  background: #f7f9fc;
+  border: 1px solid #e4e7ec;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+/* === FEATURED ARTISANS === */
+.home-featured {
+  background: #f3f4f6;
+  padding: 60px 0;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+.home-artisan-card {
+  background: white;
+  border: 1px solid #d6d6d6;
+  border-radius: 10px;
+}
+
+.home-artisan-category {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: #6b7280;
+}
+
+.home-artisan-city {
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+.home-artisan-desc {
+  color: #444;
+  font-size: 0.95rem;
+}
+
+/* === CTA FINAL === */
+.home-cta {
+  background: linear-gradient(135deg, #0d6efd, #2563eb);
+  color: white;
+  border-radius: 10px;
+}
+
+.home-cta-title {
+  font-size: 1.8rem;
+  font-weight: 600;
 }
