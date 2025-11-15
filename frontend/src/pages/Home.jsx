@@ -1,4 +1,3 @@
-// src/pages/Home.jsx
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getArtisans } from "../services/api";
@@ -15,19 +14,25 @@ export default function Home() {
         setHasError(false);
 
         const data = await getArtisans();
+        const all = Array.isArray(data) ? data : [];
 
-        let list = Array.isArray(data) ? data : [];
-
-        // On regarde si certains artisans ont un champ "top"
-        const tops = list.filter(
+        const tops = all.filter(
           (a) => a?.top === true || a?.top === 1 || a?.top === "1"
         );
 
+        let list = all;
+
         if (tops.length > 0) {
-          list = tops;
+          let finalList = [...tops];
+
+          if (finalList.length < 3) {
+            const remaining = all.filter((a) => !tops.includes(a));
+            finalList = finalList.concat(remaining.slice(0, 3 - finalList.length));
+          }
+
+          list = finalList;
         }
 
-        // On limite à 3 artisans
         setArtisans(list.slice(0, 3));
       } catch (error) {
         console.error("Erreur chargement artisans du mois :", error);
@@ -42,72 +47,60 @@ export default function Home() {
 
   const renderArtisanCard = (artisanRaw, index) => {
     const artisan = artisanRaw || {};
-
     const id = artisan.id_artisan ?? artisan.id ?? index;
 
-    // -------- CATÉGORIE : on gère le cas où c'est un objet --------
-    const rawCategory =
-      artisan.nom_categorie ??
-      artisan?.Categorie?.nom_categorie ??
-      artisan.categorie ??
+    const entreprise =
+      artisan.nom_entreprise ??
+      (artisan.prenom || artisan.nom
+        ? `${artisan.prenom ?? ""} ${artisan.nom ?? ""}`.trim()
+        : "Artisan");
+
+    const rawSpecialite =
+      artisan.nom_specialite ??
+      artisan?.Specialite?.nom_specialite ??
+      artisan.specialite ??
       "";
 
-    let category = "";
+    let specialite = "";
 
-    if (typeof rawCategory === "string") {
-      category = rawCategory;
-    } else if (rawCategory && typeof rawCategory === "object") {
-      // Cas typique : { id_categorie, nom_categorie }
-      category =
-        rawCategory.nom_categorie ??
-        rawCategory.name ??
+    if (typeof rawSpecialite === "string") {
+      specialite = rawSpecialite;
+    } else if (rawSpecialite && typeof rawSpecialite === "object") {
+      specialite =
+        rawSpecialite.nom_specialite ??
+        rawSpecialite.name ??
         "";
     }
 
-    const entreprise = artisan.nom_entreprise ?? artisan.nom ?? "Artisan";
-
     const city = artisan.ville ?? "";
 
-    const rawDescription =
-      artisan.a_propos ??
-      artisan.description ??
-      "";
-
-    const description = String(rawDescription);
-    const shortDescription =
-      description.length > 140
-        ? description.slice(0, 140) + "…"
-        : description;
-
     return (
-      <div className="col-md-4" key={id}>
-        <div className="home-artisan-card p-4 h-100">
-          {category && (
-            <p className="home-artisan-category mb-2">
-              {category}
-            </p>
-          )}
+      <div className="col-12 col-md-4 mb-4" key={id}>
+        <div className="home-artisan-card h-100 d-flex flex-column justify-content-center text-center">
+          <div className="home-artisan-name mb-3">{entreprise}</div>
 
-          <h3 className="h5 mb-1">{entreprise}</h3>
+          <div className="home-artisan-stars mb-3" aria-hidden="true">
+            ★ ★ ★ ★ ★
+          </div>
+
+          {specialite && (
+            <div className="home-artisan-specialite mb-2">
+              {specialite}
+            </div>
+          )}
 
           {city && (
-            <p className="home-artisan-city mb-2">
-              {city}
-            </p>
+            <div className="home-artisan-ville mb-4">{city}</div>
           )}
 
-          {shortDescription && (
-            <p className="home-artisan-desc mb-3">
-              {shortDescription}
-            </p>
-          )}
-
-          <Link
-            className="btn btn-primary btn-sm"
-            to={`/artisans/${artisan.id_artisan ?? artisan.id ?? ""}`}
-          >
-            Voir la fiche
-          </Link>
+          <div>
+            <Link
+              className="btn home-artisan-btn"
+              to={`/artisans/${artisan.id_artisan ?? artisan.id ?? ""}`}
+            >
+              Voir la fiche
+            </Link>
+          </div>
         </div>
       </div>
     );
@@ -115,73 +108,52 @@ export default function Home() {
 
   return (
     <div className="home-page">
-      {/* ---------- HERO ---------- */}
-      <section className="home-hero py-5">
-        <div className="container">
-          <h1 className="home-hero-title mb-3">
-            Trouve un artisan près de chez toi
+      <section className="home-how">
+        <div className="container text-center">
+          <h1 className="home-how-title mb-5">
+            Comment trouver mon artisan ?
           </h1>
-          <p className="home-hero-subtitle mb-4">
-            Compare les profils, filtre par spécialité et contacte rapidement
-            un artisan pour tes travaux.
-          </p>
-          <div className="d-flex gap-3">
-            <Link to="/artisans" className="btn btn-primary btn-lg">
-              Voir les artisans
-            </Link>
-            <a href="#artisans-du-mois" className="btn btn-outline-secondary">
-              Artisans du mois
-            </a>
-          </div>
-        </div>
-      </section>
 
-      {/* ---------- ETAPES ---------- */}
-      <section className="home-how py-5">
-        <div className="container">
-          <h2 className="home-section-title mb-4">
-            Comment ça fonctionne ?
-          </h2>
-
-          <div className="row gy-4">
-            <div className="col-md-4">
-              <div className="home-step-card p-4 h-100">
-                <h3 className="h5 mb-2">1. Cherche un artisan</h3>
-                <p>
-                  Filtre par catégorie, spécialité ou ville pour trouver un artisan proche.
-                </p>
-              </div>
+          <div className="row home-how-steps gy-4">
+            <div className="col-6 col-md-3">
+              <p className="home-how-step">
+                <span className="home-how-step-number">1.</span>{" "}
+                Choisir la catégorie d’artisanat dans le menu.
+              </p>
             </div>
-
-            <div className="col-md-4">
-              <div className="home-step-card p-4 h-100">
-                <h3 className="h5 mb-2">2. Compare les profils</h3>
-                <p>
-                  Consulte la fiche complète : description, ville, spécialité, coordonnées.
-                </p>
-              </div>
+            <div className="col-6 col-md-3">
+              <p className="home-how-step">
+                <span className="home-how-step-number">2.</span>{" "}
+                Choisir un artisan.
+              </p>
             </div>
-
-            <div className="col-md-4">
-              <div className="home-step-card p-4 h-100">
-                <h3 className="h5 mb-2">3. Contacte directement</h3>
-                <p>
-                  Utilise le formulaire de contact intégré pour joindre l’artisan.
-                </p>
-              </div>
+            <div className="col-6 col-md-3">
+              <p className="home-how-step">
+                <span className="home-how-step-number">3.</span>{" "}
+                Le contacter via le formulaire de contact.
+              </p>
+            </div>
+            <div className="col-6 col-md-3">
+              <p className="home-how-step">
+                <span className="home-how-step-number">4.</span>{" "}
+                Une réponse sera apportée sous 48h.
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ---------- ARTISANS DU MOIS ---------- */}
-      <section id="artisans-du-mois" className="home-featured py-5">
+      <section className="home-featured">
         <div className="container">
-          <h2 className="home-section-title mb-4">Artisans du mois</h2>
+          <div className="text-center mb-5">
+            <div className="home-section-divider" />
+            <h2 className="home-section-title mt-3">Artisans du mois</h2>
+          </div>
 
-          {loading && <p>Chargement…</p>}
+          {loading && <p className="text-center">Chargement…</p>}
+
           {hasError && (
-            <p className="text-danger">
+            <p className="text-danger text-center">
               Impossible de charger les artisans du mois pour le moment.
             </p>
           )}
@@ -189,27 +161,17 @@ export default function Home() {
           {!loading && !hasError && (
             <>
               {Array.isArray(artisans) && artisans.length === 0 && (
-                <p>Aucun artisan disponible.</p>
+                <p className="text-center">
+                  Aucun artisan disponible pour le moment.
+                </p>
               )}
 
-              <div className="row gy-4">
+              <div className="row justify-content-center">
                 {Array.isArray(artisans) &&
                   artisans.map((a, index) => renderArtisanCard(a, index))}
               </div>
             </>
           )}
-        </div>
-      </section>
-
-      {/* ---------- CTA FINAL ---------- */}
-      <section className="home-cta py-5">
-        <div className="container text-center">
-          <h2 className="home-cta-title mb-3">
-            Besoin d’un professionnel rapidement ?
-          </h2>
-          <Link to="/artisans" className="btn btn-light btn-lg">
-            Parcourir les artisans
-          </Link>
         </div>
       </section>
     </div>

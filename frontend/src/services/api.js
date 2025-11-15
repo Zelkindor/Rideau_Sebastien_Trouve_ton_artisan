@@ -54,21 +54,13 @@ export async function getArtisans(filters = {}) {
 
 // Détail d'un artisan
 export async function getArtisanById(id) {
-  const result = await fetchJson(`/artisans/${id}`);
+  const response = await fetch(`${API_BASE_URL}/artisans/${id}`);
 
-  if (!result) {
-    return null;
+  if (!response.ok) {
+    throw new Error("Erreur lors du chargement de l'artisan");
   }
 
-  if (result.data) {
-    return result.data;
-  }
-
-  if (result.artisan) {
-    return result.artisan;
-  }
-
-  return result;
+  return await response.json();
 }
 
 // Liste des catégories
