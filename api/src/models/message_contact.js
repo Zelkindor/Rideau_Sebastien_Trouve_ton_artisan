@@ -1,4 +1,4 @@
-// models/MessageContact.js
+// api/src/models/message_contact.js
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/database");
 
@@ -7,49 +7,48 @@ const MessageContact = sequelize.define(
   {
     id_message: {
       type: DataTypes.INTEGER.UNSIGNED,
+      primaryKey: true,
       autoIncrement: true,
-      primaryKey: true
     },
 
-    // nom_expediteur VARCHAR(150) NOT NULL
+    // Nom et prénom de l’expéditeur (dans la BDD : un seul champ)
     nom_expediteur: {
-      type: DataTypes.STRING(150),
-      allowNull: false
+      type: DataTypes.STRING(255),
+      allowNull: false,
     },
 
-    // email_expediteur VARCHAR(255) NOT NULL
+    // Email de l’expéditeur
     email_expediteur: {
       type: DataTypes.STRING(255),
-      allowNull: false
+      allowNull: false,
+      validate: {
+        isEmail: true,
+      },
     },
 
-    // contenu_message TEXT NOT NULL
+    // Contenu complet du message
     contenu_message: {
       type: DataTypes.TEXT,
-      allowNull: false
+      allowNull: false,
     },
 
-    // id_artisan INT UNSIGNED NULL
+    // Liens éventuels (suivant ta BDD)
     id_artisan: {
       type: DataTypes.INTEGER.UNSIGNED,
-      allowNull: true
+      allowNull: true,
     },
-
-    // id_specialite INT UNSIGNED NULL
     id_specialite: {
       type: DataTypes.INTEGER.UNSIGNED,
-      allowNull: true
+      allowNull: true,
     },
-
-    // id_categorie INT UNSIGNED NULL
     id_categorie: {
       type: DataTypes.INTEGER.UNSIGNED,
-      allowNull: true
-    }
+      allowNull: true,
+    },
   },
   {
     tableName: "message_contact",
-    timestamps: false
+    timestamps: false,
   }
 );
 

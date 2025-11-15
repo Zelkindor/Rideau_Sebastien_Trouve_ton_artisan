@@ -1,92 +1,815 @@
-/* === GLOBAL === */
+/* src/App.css */
+
+/* Palette officielle */
+:root {
+  --r-aura-light: #f1f8fc;
+  --r-aura-blue: #0074c7;
+  --r-aura-blue-dark: #00497c;
+  --r-aura-grey-dark: #384050;
+  --r-aura-red: #cd2c2e;
+  --r-aura-green: #82b864;
+
+  --radius-lg: 1rem;
+  --shadow-soft: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+/* Police globale – adapte l’import à ton projet */
+@font-face {
+  font-family: "Graphik";
+  src: local("Graphik"),
+       url("/fonts/Graphik-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
 body {
   margin: 0;
   font-family: "Graphik", system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", sans-serif;
-  background-color: #ffffff;
-  color: #212529;
+  background-color: var(--r-aura-light);
+  color: var(--r-aura-grey-dark);
 }
 
-/* On laisse Bootstrap gérer les largeurs, pas de max-width ni text-align général */
-#root {
-  min-height: 100vh;
+a {
+  color: var(--r-aura-blue);
+  text-decoration: none;
 }
 
-/* === HERO SECTION === */
-.home-hero {
-  background: linear-gradient(135deg, #e6efff, #ffffff);
-  padding: 80px 0;
-  margin-bottom: 40px;
+a:hover {
+  text-decoration: underline;
 }
 
-.home-hero-title {
-  font-weight: 700;
-  font-size: 2.6rem;
-  margin-bottom: 20px;
+/* Containers Bootstrap */
+.container {
+  max-width: 1140px;
 }
 
-.home-hero-subtitle {
-  max-width: 600px;
-  color: #555;
-  margin-bottom: 30px;
-  font-size: 1.1rem;
+/* ========================= */
+/* HEADER */
+/* ========================= */
+
+.site-header {
+  background: #ffffff;
+  color: var(--r-aura-grey-dark);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  padding: 0.5rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
-/* === STEPS === */
+.site-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 80px;
+  gap: 2rem;
+}
+.site-logo-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.site-logo-img {
+  height: 90px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.15));
+}
+
+.site-logo-sub {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.site-nav-link {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--r-aura-blue-dark);
+  padding: 0.2rem 0;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.site-nav-link:hover {
+  color: var(--r-aura-blue);
+  border-color: var(--r-aura-blue);
+  text-decoration: none;
+}
+
+.site-nav-link-active {
+  color: var(--r-aura-blue);
+  border-color: var(--r-aura-blue);
+  text-decoration: none;
+}
+
+.site-search-form {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-width: 260px;
+  justify-content: flex-end;
+}
+
+.site-search-input {
+  border: none;
+  border-bottom: 2px solid var(--r-aura-blue);
+  border-radius: 0;
+  background: transparent;
+  font-size: 0.9rem;
+  padding: 0.2rem 0.4rem;
+  min-width: 150px;
+}
+
+.site-search-input::placeholder {
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.site-search-input:focus {
+  outline: none;
+  border-bottom-color: var(--r-aura-blue-dark);
+}
+
+.site-search-btn {
+  border: none;
+  background: none;
+  color: var(--r-aura-blue-dark);
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0;
+  cursor: pointer;
+}
+
+.site-search-btn:hover:not(:disabled) {
+  color: var(--r-aura-blue);
+}
+
+.site-search-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.site-search-error {
+  background: #fff3f3;
+  color: var(--r-aura-red);
+  font-size: 0.85rem;
+  padding: 0.25rem 0.75rem 0.4rem;
+  border-bottom: 1px solid rgba(205, 44, 46, 0.25);
+}
+
+/* ========================= */
+/* HOME */
+/* ========================= */
+
+.home-page {
+  padding-top: 2.5rem;
+  padding-bottom: 3rem;
+}
+
+/* bloc "Comment trouver mon artisan ?" */
 .home-how {
-  margin-top: 40px;
-  margin-bottom: 40px;
+  padding-bottom: 3rem;
+}
+
+.home-how-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--r-aura-blue-dark);
+}
+
+.home-how-steps {
+  margin-top: 1rem;
+}
+
+.home-how-step {
+  background: #fff;
+  box-shadow: var(--shadow-soft);
+  border-radius: var(--radius-lg);
+  padding: 1rem 1.1rem;
+  font-size: 0.95rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  text-align: left;
+}
+
+.home-how-step-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.8rem;
+  height: 1.8rem;
+  margin-right: 0.5rem;
+  border-radius: 999px;
+  background: var(--r-aura-blue);
+  color: #fff;
+  font-weight: 700;
+}
+
+/* bloc "Artisans du mois" */
+.home-featured {
+  padding: 3rem 0 1rem;
+}
+
+.home-section-divider {
+  width: 80px;
+  height: 4px;
+  border-radius: 999px;
+  margin: 0 auto;
+  background: var(--r-aura-blue);
 }
 
 .home-section-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--r-aura-grey-dark);
+}
+
+/* cartes artisans */
+.home-artisan-card {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  padding: 1.5rem 1.2rem;
+  box-shadow: var(--shadow-soft);
+}
+
+.home-artisan-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--r-aura-blue-dark);
+}
+
+.home-artisan-stars {
+  letter-spacing: 0.15em;
+  font-size: 1.1rem;
+  color: var(--r-aura-green);
+}
+
+.home-artisan-specialite {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--r-aura-grey-dark);
+}
+
+.home-artisan-ville {
+  font-size: 0.9rem;
+  color: rgba(56, 64, 80, 0.85);
+}
+
+.home-artisan-btn {
+  background: var(--r-aura-blue);
+  color: #fff;
+  border-radius: 999px;
+  padding-inline: 1.4rem;
+  font-size: 0.9rem;
   font-weight: 600;
 }
 
-.home-step-card {
-  background: #f7f9fc;
-  border: 1px solid #e4e7ec;
-  border-radius: 10px;
-  padding: 20px;
+.home-artisan-btn:hover {
+  background: var(--r-aura-blue-dark);
+  color: #fff;
 }
 
-/* === FEATURED ARTISANS === */
-.home-featured {
-  background: #f3f4f6;
-  padding: 60px 0;
-  margin-top: 20px;
-  margin-bottom: 40px;
-}
+/* ========================= */
+/* FOOTER */
+/* ========================= */
 
-.home-artisan-card {
-  background: white;
-  border: 1px solid #d6d6d6;
-  border-radius: 10px;
-}
-
-.home-artisan-category {
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  color: #6b7280;
-}
-
-.home-artisan-city {
-  color: #6b7280;
+.site-footer {
+  margin-top: 4rem;
   font-size: 0.9rem;
 }
 
-.home-artisan-desc {
-  color: #444;
+/* Bloc bleu principal */
+.site-footer-top {
+  background: var(--r-aura-blue);
+  color: #ffffff;
+  padding: 2.5rem 0 2.25rem;
+}
+
+.site-footer-top-inner {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 3rem;
+}
+
+/* Marque / logo */
+
+.site-footer-brand {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  max-width: 520px;
+}
+
+.site-footer-logo {
+  height: 90px;
+  width: auto;
+  object-fit: contain;
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 6px 10px;
+}
+
+.site-footer-brand-line {
+  font-weight: 700;
+  font-size: 1rem;
+  margin: 0 0 0.3rem;
+}
+
+.site-footer-brand-subline {
+  margin: 0;
+  line-height: 1.5;
+  opacity: 0.9;
+}
+
+/* Colonne Lyon */
+
+.site-footer-region {
+  text-align: left;
+}
+
+.site-footer-region-title {
+  font-weight: 700;
+  font-size: 1rem;
+  margin: 0 0 0.5rem;
+}
+
+.site-footer-region-text {
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Barre inférieure */
+
+.site-footer-bottom {
+  background: var(--r-aura-blue);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.85rem 0 1rem;
+  color: #ffffff;
+}
+
+.site-footer-bottom-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1rem;
+}
+
+/* Menu pages légales */
+
+.site-footer-legal-nav {
+  flex: 1;
+}
+
+.site-footer-legal-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.site-footer-legal-list a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.site-footer-legal-list a:hover {
+  text-decoration: underline;
+}
+
+/* Copyright */
+
+.site-footer-copy {
+  font-size: 0.8rem;
+  opacity: 0.9;
+  text-align: right;
+}
+
+/* Responsif */
+
+@media (max-width: 767.98px) {
+  .site-footer-top-inner {
+    flex-direction: column;
+  }
+
+  .site-footer-bottom-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .site-footer-copy {
+    text-align: left;
+  }
+}
+
+/* Pages légales */
+.legal-page {
+  min-height: 60vh;
+}
+
+/* ========================= */
+/* RESPONSIVE */
+/* ========================= */
+
+@media (max-width: 767.98px) {
+  .site-header-inner {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .site-search-form {
+    min-width: 100%;
+  }
+
+  .home-how-step {
+    font-size: 0.9rem;
+  }
+}
+
+/* ========================= */
+/* PAGE ARTISANS */
+/* ========================= */
+
+.artisans-page {
+  padding: 2.5rem 0 3rem;
+  background: var(--r-aura-light);
+}
+
+.artisans-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.artisans-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--r-aura-blue-dark);
+  margin-bottom: 0.25rem;
+}
+
+.artisans-subtitle {
+  margin: 0;
+  font-size: 0.95rem;
+  color: rgba(56, 64, 80, 0.85);
+}
+
+.artisans-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  justify-content: flex-end;
+}
+
+.artisans-search {
+  min-width: 220px;
+}
+
+.artisans-search-input {
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  font-size: 0.9rem;
+  padding-inline: 0.9rem;
+}
+
+.artisans-search-input:focus {
+  outline: none;
+  border-color: var(--r-aura-blue);
+  box-shadow: 0 0 0 2px rgba(0, 116, 199, 0.2);
+}
+
+/* Bouton reset catégorie */
+
+.artisans-reset-btn {
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0);
+  background: #ffffff;
+  color: var(--r-aura-blue-dark);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.35rem 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.artisans-reset-btn:hover {
+  background: var(--r-aura-light);
+}
+
+/* Cartes artisans */
+
+.artisans-card {
+  background: #ffffff;
+  border-radius: 1rem;
+  padding: 1.4rem 1.3rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+}
+
+.artisans-card-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--r-aura-blue-dark);
+}
+
+.artisans-card-stars {
+  color: var(--r-aura-green);
+  font-size: 1.05rem;
+  letter-spacing: 0.15em;
+}
+
+.artisans-card-specialite {
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.artisans-card-ville {
+  font-size: 0.9rem;
+  color: rgba(56, 64, 80, 0.85);
+}
+
+.artisans-card-btn {
+  background: var(--r-aura-blue);
+  color: #ffffff;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding-inline: 1.3rem;
+}
+
+.artisans-card-btn:hover {
+  background: var(--r-aura-blue-dark);
+  color: #ffffff;
+}
+
+@media (max-width: 767.98px) {
+  .artisans-header {
+    align-items: flex-start;
+  }
+
+  .artisans-actions {
+    justify-content: flex-start;
+  }
+}
+
+/* ========================= */
+/* FICHE ARTISAN */
+/* ========================= */
+
+.artisan-page {
+  padding: 2.5rem 0 3rem;
+  background: var(--r-aura-light);
+}
+
+.artisan-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+
+.artisan-title {
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: var(--r-aura-blue-dark);
+  margin-bottom: 0.25rem;
+}
+
+.artisan-specialite {
+  margin: 0;
+  font-weight: 500;
+  color: var(--r-aura-blue);
+}
+
+.artisan-ville {
+  margin: 0.1rem 0 0;
+  color: rgba(56, 64, 80, 0.85);
+}
+
+.artisan-header-actions {
+  display: flex;
+  align-items: center;
+}
+
+.artisan-back-btn {
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.35rem 1.1rem;
+}
+
+.artisan-back-btn:hover {
+  background: var(--r-aura-light);
+}
+
+/* layout */
+
+.artisan-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1.2fr);
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.artisan-section-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--r-aura-grey-dark);
+}
+
+.artisan-description {
+  background: #ffffff;
+  border-radius: 1rem;
+  padding: 1.4rem 1.3rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* aside contact */
+
+.artisan-contact-card {
+  background: #ffffff;
+  border-radius: 1rem;
+  padding: 1.4rem 1.3rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+}
+
+.artisan-contact-line {
+  margin: 0 0 0.4rem;
   font-size: 0.95rem;
 }
 
-/* === CTA FINAL === */
-.home-cta {
-  background: linear-gradient(135deg, #0d6efd, #2563eb);
-  color: white;
-  border-radius: 10px;
+.artisan-contact-label {
+  font-weight: 600;
 }
 
-.home-cta-title {
-  font-size: 1.8rem;
+.artisan-contact-btn {
+  background: var(--r-aura-blue);
+  color: #ffffff;
+  border-radius: 999px;
+  font-size: 0.9rem;
   font-weight: 600;
+  padding-inline: 1.4rem;
+  margin-top: 1rem;
+}
+
+.artisan-contact-btn:hover {
+  background: var(--r-aura-blue-dark);
+  color: #ffffff;
+}
+
+@media (max-width: 767.98px) {
+  .artisan-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .artisan-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* ========================= */
+/* PAGE CONTACT */
+/* ========================= */
+
+.contact-page {
+  padding: 2.5rem 0 3rem;
+  background: var(--r-aura-light);
+}
+
+.contact-header {
+  max-width: 640px;
+}
+
+.contact-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--r-aura-blue-dark);
+  margin-bottom: 0.25rem;
+}
+
+.contact-subtitle {
+  margin: 0;
+  font-size: 0.95rem;
+  color: rgba(56, 64, 80, 0.85);
+}
+
+.contact-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1.2fr);
+  gap: 2rem;
+  margin-top: 1.75rem;
+}
+
+.contact-section-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--r-aura-grey-dark);
+}
+
+/* Formulaire */
+
+.contact-form {
+  background: #ffffff;
+  border-radius: 1rem;
+  padding: 1.6rem 1.4rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+}
+
+.contact-form .form-label {
+  font-weight: 500;
+}
+
+.contact-form .form-text {
+  font-size: 0.8rem;
+}
+
+/* Messages d'état */
+
+.contact-alert {
+  padding: 0.6rem 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.contact-alert-error {
+  background: #fff3f3;
+  color: var(--r-aura-red);
+  border: 1px solid rgba(205, 44, 46, 0.4);
+}
+
+.contact-alert-success {
+  background: #ecf9f0;
+  color: var(--r-aura-green);
+  border: 1px solid rgba(130, 184, 100, 0.6);
+}
+
+.contact-submit-btn {
+  background: var(--r-aura-blue);
+  color: #ffffff;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding-inline: 1.6rem;
+}
+
+.contact-submit-btn:hover:not(:disabled) {
+  background: var(--r-aura-blue-dark);
+  color: #ffffff;
+}
+
+/* Aside artisan */
+
+.contact-aside-card {
+  background: #ffffff;
+  border-radius: 1rem;
+  padding: 1.4rem 1.3rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+  font-size: 0.95rem;
+}
+
+.contact-artisan-name {
+  font-weight: 700;
+  margin-bottom: 0.1rem;
+}
+
+.contact-artisan-specialite {
+  margin: 0;
+}
+
+.contact-artisan-ville {
+  margin: 0 0 0.5rem;
+  color: rgba(56, 64, 80, 0.85);
+}
+
+.contact-artisan-note {
+  margin: 0;
+  font-size: 0.9rem;
+  color: rgba(56, 64, 80, 0.85);
+}
+
+@media (max-width: 767.98px) {
+  .contact-layout {
+    grid-template-columns: 1fr;
+  }
 }

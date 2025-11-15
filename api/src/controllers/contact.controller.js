@@ -1,66 +1,149 @@
-// controllers/contact.controller.js
-const contactService = require("../services/contact.service");
+// api/src/controllers/contact.controller.js
+const { MessageContact, Artisan } = require("../models");
+const { sendContactEmail } = require("../services/mailService");
 
 function isValidEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
-exports.postContact = async (req, res) => {
+exports.createContactMessage = async (req, res) => {
   try {
-    const {
-      nom_expediteur,
-      email_expediteur,
-      contenu_message,
+    const body = req.body || {};
+
+    console.log("CONTACT BODY RECU :", body);
+
+    // ====== RÉCUPÉRATION DES CHAMPS AVEC MAPPING FRONT ======
+
+    // Nom + prénom : le front envoie nom_expediteur = "test1 test2"
+    let fullName =
+      (body.nom_expediteur ??
+        body.nom ??
+        body.name ??
+        body.fullName ??
+        "").toString().trim();
+
+    let prenom = "";
+    let nom = "";
+
+    if (fullName) {
+      const parts = fullName.split(" ");
+      prenom = parts[0] || "";
+      nom = parts.slice(1).join(" ") || "";
+    }
+
+    // On garde quand même la compatibilité si un jour tu changes le front
+    prenom =
+      (body.prenom ??
+        body.firstName ??
+        body.firstname ??
+        prenom ??
+        "").toString().trim();
+    nom =
+      (body.nom ??
+        body.lastName ??
+        body.lastname ??
+        nom ??
+        "").toString().trim();
+
+    // Email : le front envoie email_expediteur
+    let email = (
+      body.email_expediteur ??
+      body.email ??
+      body.mail ??
+      ""
+    )
+      .toString()
+      .trim();
+
+    // Message : le front envoie contenu_message
+    let message = (
+      body.contenu_message ??
+      body.message ??
+      body.content ??
+      body.contenu ??
+      ""
+    )
+      .toString()
+      .trim();
+
+    const id_artisan =
+      body.id_artisan ?? body.artisanId ?? body.idArtisan ?? null;
+
+    console.log("Valeurs interprétées :", {
+      prenom,
+      nom,
+      email,
+      message,
       id_artisan,
-      id_specialite,
-      id_categorie
-    } = req.body || {};
+    });
 
-    const errors = [];
+    // ====== VALIDATION BASIQUE ======
 
-    if (!nom_expediteur || typeof nom_expediteur !== "string" || nom_expediteur.trim().length < 2) {
-      errors.push("Le nom de l'expéditeur est obligatoire (au moins 2 caractères).");
+    if (!prenom || !nom || !email || !message) {
+      return res.status(400).json({
+        error: "Les champs prénom, nom, email et message sont obligatoires.",
+      });
     }
 
-    if (!email_expediteur || !isValidEmail(email_expediteur)) {
-      errors.push("L'email de l'expéditeur est obligatoire et doit être valide.");
+    if (!isValidEmail(email)) {
+      return res.status(400).json({
+        error: "L'adresse email n'est pas valide.",
+      });
     }
 
-    if (!contenu_message || typeof contenu_message !== "string" || contenu_message.trim().length < 10) {
-      errors.push("Le message est obligatoire (au moins 10 caractères).");
+    if (message.length < 10) {
+      return res.status(400).json({
+        error: "Le message doit contenir au moins 10 caractères.",
+      });
     }
 
-    const parseOptionalInt = (value) => {
-      if (value === null || value === undefined || value === "") return null;
-      const n = Number(value);
-      return Number.isNaN(n) ? null : n;
-    };
+    // ====== RÉCUPÉRATION OPTIONNELLE DE L'ARTISAN ======
 
-    const normalizedPayload = {
-      nom_expediteur: nom_expediteur?.trim(),
-      email_expediteur: email_expediteur?.trim(),
-      contenu_message: contenu_message?.trim(),
-      id_artisan: parseOptionalInt(id_artisan),
-      id_specialite: parseOptionalInt(id_specialite),
-      id_categorie: parseOptionalInt(id_categorie)
-    };
+    let artisan = null;
 
-    if (errors.length > 0) {
-      return res.status(400).json({ errors });
+    if (id_artisan) {
+      artisan = await Artisan.findByPk(id_artisan);
+      if (!artisan) {
+        console.warn(
+          `Aucun artisan trouvé pour id_artisan = ${id_artisan}, le message sera enregistré sans lien.`
+        );
+      }
     }
 
-    const message = await contactService.createContactMessage(normalizedPayload);
+    // ====== ENREGISTREMENT EN BASE ======
+
+    const saved = await MessageContact.create({
+      nom_expediteur: `${prenom} ${nom}`.trim(),
+
+      email_expediteur: email,
+      contenu_message: message,
+
+      id_artisan: artisan ? artisan.id_artisan ?? artisan.id : null,
+      id_specialite: body.id_specialite ?? null,
+      id_categorie: body.id_categorie ?? null,
+    });
+
+    // ====== ENVOI EMAIL (ON NE BLOQUE PAS SI ÇA ÉCHOUE) ======
+
+    try {
+      await sendContactEmail({
+        artisan,
+        payload: { prenom, nom, email, message },
+      });
+    } catch (mailError) {
+      console.error("Erreur durant l'envoi du mail de contact :", mailError);
+    }
 
     return res.status(201).json({
-      message: "Message de contact enregistré avec succès.",
-      data: {
-        id_message: message.id_message
-      }
+      success: true,
+      message: "Votre message a bien été envoyé.",
+      id_message: saved.id_message,
     });
   } catch (error) {
-    console.error("Erreur POST /contact :", error);
+    console.error("Erreur createContactMessage :", error);
     return res.status(500).json({
-      error: "Erreur serveur lors de l'enregistrement du message de contact"
+      error:
+        "Une erreur interne est survenue lors de l'envoi du message. Veuillez réessayer plus tard.",
     });
   }
 };
