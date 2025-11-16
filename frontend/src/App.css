@@ -600,20 +600,29 @@ a:hover {
   color: rgba(56, 64, 80, 0.85);
 }
 
+/* note sur la fiche artisan */
 .artisan-note {
-  margin: 0.5rem 0 0;
-  font-size: 0.95rem;
-  color: rgba(56, 64, 80, 0.9);
+  margin-top: 0.4rem;
 }
 
 .artisan-note-stars {
   color: var(--r-aura-green);
+  font-size: 1.1rem;
   letter-spacing: 0.15em;
-  font-size: 1.05rem;
 }
 
-.artisan-note-label {
-  margin-left: 0.35rem;
+.artisan-note-text {
+  margin: 0.1rem 0 0;
+  font-size: 0.9rem;
+  color: rgba(56, 64, 80, 0.85);
+}
+
+/* image de la fiche artisan */
+.artisan-image {
+  display: block;
+  max-width: 180px;
+  border-radius: 1rem;
+  margin-bottom: 1.2rem;
 }
 
 .artisan-header-actions {
@@ -660,6 +669,20 @@ a:hover {
 }
 
 /* aside contact */
+
+.artisan-contact-form {
+  margin-top: 0.5rem;
+}
+
+.artisan-contact-form .form-label {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.artisan-contact-form textarea {
+  resize: vertical;
+  min-height: 100px;
+}
 
 .artisan-contact-card {
   background: #ffffff;
