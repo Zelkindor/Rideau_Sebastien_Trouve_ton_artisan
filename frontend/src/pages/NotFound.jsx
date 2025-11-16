@@ -1,21 +1,23 @@
 // src/pages/NotFound.jsx
 import { Link } from "react-router-dom";
-import logo from "../assets/Logo.png";
 import { useEffect } from "react";
+import image404 from "../assets/image_404.png"; // nouvelle image
 
 export default function NotFound() {
-
   useEffect(() => {
     document.title = "Page introuvable — Trouve ton artisan";
   }, []);
 
   return (
     <main className="notfound-page container py-5 text-center">
+
+      {/* Nouvelle image 404 */}
       <div className="mb-4">
         <img
-          src={logo}
-          alt="Trouve ton artisan"
-          className="notfound-logo mb-3"
+          src={image404}
+          alt="Page introuvable"
+          className="notfound-illustration mb-3"
+          style={{ maxWidth: "320px", width: "100%", height: "auto" }}
         />
       </div>
 
