@@ -85,13 +85,20 @@ export async function getCategories() {
 // Liste contact
 export async function sendContactMessage(form) {
   const payload = {
-    nom_expediteur: `${form.prenom} ${form.nom}`.trim(), // concatène Prénom + Nom
-    email_expediteur: form.email,
+    nom_expediteur:
+      form.nom_expediteur ??
+      `${form.prenom ?? ""} ${form.nom ?? ""}`.trim(),
+
+    email_expediteur: form.email_expediteur ?? form.email ?? "",
+
     contenu_message:
-      `Sujet : ${form.sujet}\nTéléphone : ${form.telephone}\n\n${form.message}`,
-    id_artisan: null,
-    id_specialite: null,
-    id_categorie: null
+      form.contenu_message ??
+      form.message ??
+      "",
+
+    id_artisan: form.id_artisan ?? null,
+    id_specialite: form.id_specialite ?? null,
+    id_categorie: form.id_categorie ?? null,
   };
 
   return fetchJson("/contact", {
