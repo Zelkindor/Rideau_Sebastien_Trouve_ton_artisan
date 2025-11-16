@@ -164,6 +164,28 @@ a:hover {
   border-bottom: 1px solid rgba(205, 44, 46, 0.25);
 }
 
+/* Navigation mobile (sélecteur de catégories) */
+.site-nav-mobile {
+  background: #ffffff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  padding: 0.5rem 0 0.75rem;
+}
+
+.site-nav-mobile-label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--r-aura-blue-dark);
+  margin-bottom: 0.25rem;
+}
+
+.site-nav-mobile-select {
+  font-size: 0.9rem;
+  border-radius: 999px;
+  padding-inline: 0.9rem;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
 /* ========================= */
 /* HOME */
 /* ========================= */
@@ -426,10 +448,17 @@ a:hover {
   .site-header-inner {
     flex-direction: column;
     align-items: stretch;
+    gap: 0.75rem;
+    height: auto;
+  }
+
+  .site-logo-img {
+    height: 70px;
   }
 
   .site-search-form {
     min-width: 100%;
+    justify-content: flex-start;
   }
 
   .home-how-step {
