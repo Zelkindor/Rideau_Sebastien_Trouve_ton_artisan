@@ -422,7 +422,19 @@ a:hover {
 
 @media (max-width: 767.98px) {
   .site-footer-top-inner {
-    flex-direction: column;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1.5rem;
+  }
+
+  .site-footer-brand {
+    max-width: 55%;
+  }
+
+  .site-footer-region {
+    flex: 1;
+    font-size: 0.85rem;
   }
 
   .site-footer-bottom-inner {
