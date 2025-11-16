@@ -1,4 +1,11 @@
+import { useEffect } from "react";
+
 export default function DonneesPersonnelles() {
+
+  useEffect(() => {
+    document.title = "Données personnelles — Trouve ton artisan";
+  }, []);
+
   return (
     <main className="legal-page container py-5">
       <h1 className="mb-4">Données personnelles</h1>

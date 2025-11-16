@@ -8,6 +8,10 @@ export default function Home() {
   const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
+    document.title = "Trouve ton artisan - Accueil";
+  }, []);
+
+  useEffect(() => {
     async function loadArtisans() {
       try {
         setLoading(true);

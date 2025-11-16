@@ -29,6 +29,10 @@ export default function ArtisanDetail() {
   const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
+    document.title = "Artisan — Trouve ton artisan";
+  }, []);
+
+  useEffect(() => {
     async function loadArtisan() {
       try {
         setLoading(true);
