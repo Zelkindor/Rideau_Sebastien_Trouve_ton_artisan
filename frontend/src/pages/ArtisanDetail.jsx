@@ -3,6 +3,25 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { getArtisanById } from "../services/api";
 
+const renderStars = (noteRaw) => {
+    const value = parseFloat(noteRaw);
+    if (Number.isNaN(value) || value <= 0) {
+      return {
+        stars: "☆☆☆☆☆",
+        label: "Note non renseignée",
+      };
+    }
+
+    const capped = Math.max(0, Math.min(5, value));
+    const full = Math.round(capped);
+    const stars = "★".repeat(full) + "☆".repeat(5 - full);
+
+    return {
+      stars,
+      label: `${capped.toFixed(1).replace(".", ",")}/5`,
+    };
+  };
+
 export default function ArtisanDetail() {
   const { id } = useParams();
   const [artisan, setArtisan] = useState(null);
@@ -69,6 +88,7 @@ export default function ArtisanDetail() {
     artisan?.Specialite?.nom_specialite ??
     artisan.specialite ??
     "";
+  const { stars, label: noteLabel } = renderStars(artisan.note);
   const rawCategorie =
   artisan?.Specialite?.Categorie?.nom_categorie ??
   artisan.nom_categorie ??
@@ -103,6 +123,10 @@ export default function ArtisanDetail() {
                 {ville}
               </p>
             )}
+            <p className="artisan-note" aria-label={`Note de l'artisan : ${noteLabel}`}>
+              <span className="artisan-note-stars">{stars}</span>{" "}
+              <span className="artisan-note-label">{noteLabel}</span>
+            </p>
           </div>
 
           <div className="artisan-header-actions">

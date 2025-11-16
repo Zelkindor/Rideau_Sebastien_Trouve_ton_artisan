@@ -45,6 +45,25 @@ export default function Home() {
     loadArtisans();
   }, []);
 
+  const renderStars = (noteRaw) => {
+  const value = parseFloat(noteRaw);
+  if (Number.isNaN(value) || value <= 0) {
+    return {
+      stars: "☆☆☆☆☆",
+      label: "Note non renseignée",
+    };
+  }
+
+  const capped = Math.max(0, Math.min(5, value));
+  const full = Math.round(capped);
+  const stars = "★".repeat(full) + "☆".repeat(5 - full);
+
+  return {
+    stars,
+    label: `${capped.toFixed(1).replace(".", ",")}/5`,
+  };
+};
+
   const renderArtisanCard = (artisanRaw, index) => {
     const artisan = artisanRaw || {};
     const id = artisan.id_artisan ?? artisan.id ?? index;
@@ -74,13 +93,18 @@ export default function Home() {
 
     const city = artisan.ville ?? "";
 
+    const { stars, label } = renderStars(artisan.note);
+
     return (
       <div className="col-12 col-md-4 mb-4" key={id}>
         <div className="home-artisan-card h-100 d-flex flex-column justify-content-center text-center">
           <div className="home-artisan-name mb-3">{entreprise}</div>
 
-          <div className="home-artisan-stars mb-3" aria-hidden="true">
-            ★ ★ ★ ★ ★
+          <div className="home-artisan-stars mb-1" aria-hidden="true">
+            {stars}
+          </div>
+          <div className="mb-3" aria-label={`Note de l'artisan : ${label}`}>
+            {label}
           </div>
 
           {specialite && (

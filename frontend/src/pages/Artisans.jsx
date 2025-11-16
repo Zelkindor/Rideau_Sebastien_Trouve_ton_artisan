@@ -58,6 +58,25 @@ export default function Artisans() {
     });
   };
 
+  const renderStars = (noteRaw) => {
+    const value = parseFloat(noteRaw);
+    if (Number.isNaN(value) || value <= 0) {
+      return {
+        stars: "☆☆☆☆☆",
+        label: "Note non renseignée",
+      };
+    }
+
+    const capped = Math.max(0, Math.min(5, value));
+    const full = Math.round(capped);
+    const stars = "★".repeat(full) + "☆".repeat(5 - full);
+
+    return {
+      stars,
+      label: `${capped.toFixed(1).replace(".", ",")}/5`,
+    };
+  };
+
   const filteredArtisans = useMemo(() => {
     let list = Array.isArray(artisans) ? artisans : [];
 
@@ -122,17 +141,19 @@ export default function Artisans() {
         rawSpecialite.nom_specialite ?? rawSpecialite.name ?? "";
     }
 
+    const { stars, label } = renderStars(artisan.note);
+
     return (
       <div className="col-12 col-md-6 col-lg-4 mb-4" key={id}>
         <div className="artisans-card h-100 d-flex flex-column justify-content-between">
           <div>
             <h3 className="artisans-card-name mb-2">{entreprise}</h3>
 
-            <div
-              className="artisans-card-stars mb-2"
-              aria-hidden="true"
-            >
-              ★ ★ ★ ★ ★
+            <div className="artisans-card-stars mb-1" aria-hidden="true">
+              {stars}
+            </div>
+            <div className="mb-2" aria-label={`Note de l'artisan : ${label}`}>
+              {label}
             </div>
 
             {specialite && (
