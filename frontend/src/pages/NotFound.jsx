@@ -1,8 +1,14 @@
 // src/pages/NotFound.jsx
 import { Link } from "react-router-dom";
 import logo from "../assets/Logo.png";
+import { useEffect } from "react";
 
 export default function NotFound() {
+
+  useEffect(() => {
+    document.title = "Page introuvable — Trouve ton artisan";
+  }, []);
+
   return (
     <main className="notfound-page container py-5 text-center">
       <div className="mb-4">

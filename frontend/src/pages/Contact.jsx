@@ -20,7 +20,10 @@ export default function Contact() {
   const [sendError, setSendError] = useState("");
   const [sendSuccess, setSendSuccess] = useState(false);
 
-  // Charger l'artisan si un id est présent dans l'URL
+  useEffect(() => {
+    document.title = "Contact — Trouve ton artisan";
+  }, []);
+
   useEffect(() => {
     async function loadArtisan() {
       if (!artisanIdFromQuery) return;

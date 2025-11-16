@@ -17,6 +17,10 @@ export default function Artisans() {
   const activeCategoryId = searchParams.get("categorie") || "";
 
   useEffect(() => {
+    document.title = "Artisans — Trouve ton artisan";
+  }, []);
+
+  useEffect(() => {
     async function loadData() {
       try {
         setLoading(true);

@@ -15,6 +15,10 @@ export default function ListArtisans() {
   const [error, setError] = useState("");
 
   useEffect(() => {
+    document.title = "Artisans — Trouve ton artisan";
+  }, []);
+
+  useEffect(() => {
     async function loadCategories() {
       try {
         const data = await getCategories();

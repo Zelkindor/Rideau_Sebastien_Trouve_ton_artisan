@@ -1,4 +1,12 @@
+import { useEffect } from "react";
+
 export default function Cookies() {
+
+  useEffect(() => {
+    document.title = "Cookies — Trouve ton artisan";
+  }, []);
+
+
   return (
     <main className="legal-page container py-5">
       <h1 className="mb-4">Cookies</h1>

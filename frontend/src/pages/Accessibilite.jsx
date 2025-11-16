@@ -1,4 +1,11 @@
+import { useEffect } from "react";
+
 export default function Accessibilite() {
+
+  useEffect(() => {
+    document.title = "Accessibilité — Trouve ton artisan";
+  }, []);
+
   return (
     <main className="legal-page container py-5">
       <h1 className="mb-4">Accessibilité</h1>
