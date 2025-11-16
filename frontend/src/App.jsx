@@ -11,6 +11,7 @@ import Cookies from "./pages/Cookies";
 import Artisans from "./pages/Artisans";
 import ArtisanDetail from "./pages/ArtisanDetail";
 import Contact from "./pages/Contact";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/artisans" element={<Artisans />} />
         <Route path="/artisans/:id" element={<ArtisanDetail />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
     </Router>
