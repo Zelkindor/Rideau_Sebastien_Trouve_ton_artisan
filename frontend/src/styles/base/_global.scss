@@ -1,0 +1,30 @@
+// Police globale – même définition qu'avant
+@font-face {
+  font-family: "Graphik";
+  src: local("Graphik"),
+    url("/fonts/Graphik-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+body {
+  margin: 0;
+  font-family: "Graphik", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  background-color: var(--r-aura-light);
+  color: var(--r-aura-grey-dark);
+}
+
+body a {
+  color: var(--r-aura-blue);
+  text-decoration: none;
+}
+
+body a:hover {
+  text-decoration: underline;
+}
+
+/* Containers Bootstrap */
+.container {
+  max-width: 1140px;
+}

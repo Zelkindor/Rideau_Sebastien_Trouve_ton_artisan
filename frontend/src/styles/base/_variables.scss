@@ -1,0 +1,22 @@
+// Variables Sass (palette + tokens)
+$color-aura-light: #f1f8fc;
+$color-aura-blue: #0074c7;
+$color-aura-blue-dark: #00497c;
+$color-aura-grey-dark: #384050;
+$color-aura-red: #cd2c2e;
+$color-aura-green: #82b864;
+
+$radius-lg: 1rem;
+$shadow-soft: 0 10px 25px rgba(0, 0, 0, 0.08);
+
+:root {
+  --r-aura-light: #{$color-aura-light};
+  --r-aura-blue: #{$color-aura-blue};
+  --r-aura-blue-dark: #{$color-aura-blue-dark};
+  --r-aura-grey-dark: #{$color-aura-grey-dark};
+  --r-aura-red: #{$color-aura-red};
+  --r-aura-green: #{$color-aura-green};
+
+  --radius-lg: #{$radius-lg};
+  --shadow-soft: #{$shadow-soft};
+}

@@ -1,0 +1,127 @@
+/* ========================= */
+/* PAGE ARTISANS */
+/* ========================= */
+
+.artisans-page {
+  padding: 2.5rem 0 3rem;
+  background: var(--r-aura-light);
+}
+
+.artisans-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.artisans-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--r-aura-blue-dark);
+  margin-bottom: 0.25rem;
+}
+
+.artisans-subtitle {
+  margin: 0;
+  font-size: 0.95rem;
+  color: rgba(56, 64, 80, 0.85);
+}
+
+.artisans-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  justify-content: flex-end;
+}
+
+.artisans-search {
+  min-width: 220px;
+}
+
+.artisans-search-input {
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  font-size: 0.9rem;
+  padding-inline: 0.9rem;
+}
+
+.artisans-search-input:focus {
+  outline: none;
+  border-color: var(--r-aura-blue);
+  box-shadow: 0 0 0 2px rgba(0, 116, 199, 0.2);
+}
+
+/* Bouton reset catégorie */
+.artisans-reset-btn {
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0);
+  background: #ffffff;
+  color: var(--r-aura-blue-dark);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.35rem 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.artisans-reset-btn:hover {
+  background: var(--r-aura-light);
+}
+
+/* Cartes artisans */
+.artisans-card {
+  background: #ffffff;
+  border-radius: 1rem;
+  padding: 1.4rem 1.3rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+}
+
+.artisans-card-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--r-aura-blue-dark);
+}
+
+.artisans-card-stars {
+  color: var(--r-aura-green);
+  font-size: 1.05rem;
+  letter-spacing: 0.15em;
+}
+
+.artisans-card-specialite {
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.artisans-card-ville {
+  font-size: 0.9rem;
+  color: rgba(56, 64, 80, 0.85);
+}
+
+.artisans-card-btn {
+  background: var(--r-aura-blue);
+  color: #ffffff;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding-inline: 1.3rem;
+}
+
+.artisans-card-btn:hover {
+  background: var(--r-aura-blue-dark);
+  color: #ffffff;
+}
+
+/* RESPONSIVE ARTISANS */
+@media (max-width: 767.98px) {
+  .artisans-header {
+    align-items: flex-start;
+  }
+
+  .artisans-actions {
+    justify-content: flex-start;
+  }
+}

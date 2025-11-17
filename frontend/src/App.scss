@@ -1,0 +1,14 @@
+@import "./styles/base/variables";
+@import "./styles/base/reset";
+@import "./styles/base/global";
+
+@import "./styles/layout/layout";
+@import "./styles/layout/header";
+@import "./styles/layout/footer";
+
+@import "./styles/pages/home";
+@import "./styles/pages/artisans";
+@import "./styles/pages/artisan-detail";
+@import "./styles/pages/contact";
+@import "./styles/pages/notfound";
+@import "./styles/pages/legal";
