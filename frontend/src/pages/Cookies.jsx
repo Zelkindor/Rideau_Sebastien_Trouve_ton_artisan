@@ -1,12 +1,12 @@
-import { useEffect } from "react";
+import Seo from "../components/Seo";
 
 export default function Cookies() {
-  useEffect(() => {
-    document.title = "Cookies — Trouve ton artisan";
-  }, []);
-
   return (
     <main className="legal-page" aria-labelledby="legal-title">
+      <Seo
+        title="Cookies — Trouve ton artisan"
+        description="Informations sur l'utilisation des cookies sur le site Trouve ton artisan. Contenu provisoire en attente de validation."
+      />
       <div className="container py-5">
         <h1 id="legal-title" className="mb-4">Cookies</h1>
         <p>

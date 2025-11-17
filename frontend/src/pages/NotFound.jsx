@@ -1,17 +1,15 @@
 // src/pages/NotFound.jsx
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
-import image404 from "../assets/image_404.png"; // nouvelle image
+import image404 from "../assets/image_404.png";
+import Seo from "../components/Seo";
 
 export default function NotFound() {
-  useEffect(() => {
-    document.title = "Page introuvable — Trouve ton artisan";
-  }, []);
-
   return (
     <main className="notfound-page container py-5 text-center">
-
-      {/* Nouvelle image 404 */}
+      <Seo
+        title="Page introuvable — Trouve ton artisan"
+        description="La page que vous cherchez est introuvable sur le site Trouve ton artisan. Revenez à la page d'accueil pour découvrir les artisans de la région Auvergne-Rhône-Alpes."
+      />
       <div className="mb-4">
         <img
           src={image404}

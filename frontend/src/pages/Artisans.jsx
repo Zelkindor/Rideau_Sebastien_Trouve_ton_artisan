@@ -2,6 +2,7 @@
 import { useEffect, useState, useMemo } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { getArtisans, getCategories } from "../services/api";
+import Seo from "../components/Seo";
 
 export default function Artisans() {
   const [artisans, setArtisans] = useState([]);
@@ -15,10 +16,6 @@ export default function Artisans() {
 
   const searchParams = new URLSearchParams(location.search);
   const activeCategoryId = searchParams.get("categorie") || "";
-
-  useEffect(() => {
-    document.title = "Artisans — Trouve ton artisan";
-  }, []);
 
   useEffect(() => {
     async function loadData() {
@@ -186,6 +183,10 @@ export default function Artisans() {
 
   return (
     <main className="artisans-page">
+      <Seo
+        title="Artisans — Trouve ton artisan"
+        description="Consultez la liste des artisans de la région Auvergne-Rhône-Alpes, filtrez par catégorie ou métier et accédez aux fiches détaillées de chaque professionnel."
+      />
       <div className="container">
         <header className="artisans-header">
           <div>

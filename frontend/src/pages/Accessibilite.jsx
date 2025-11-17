@@ -1,12 +1,12 @@
-import { useEffect } from "react";
+import Seo from "../components/Seo";
 
 export default function Accessibilite() {
-  useEffect(() => {
-    document.title = "Accessibilité — Trouve ton artisan";
-  }, []);
-
   return (
     <main className="legal-page" aria-labelledby="legal-title">
+      <Seo
+        title="Accessibilité — Trouve ton artisan"
+        description="Déclaration d'accessibilité du site Trouve ton artisan. Page en construction, le contenu détaillé sera ajouté ultérieurement."
+      />
       <div className="container py-5">
         <h1 id="legal-title" className="mb-4">Accessibilité</h1>
         <p>

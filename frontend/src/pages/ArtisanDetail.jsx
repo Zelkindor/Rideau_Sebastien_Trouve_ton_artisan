@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { getArtisanById, sendContactMessage } from "../services/api";
 import ArtisanImage from "../assets/image_artisan.png";
+import Seo from "../components/Seo";
 
 export default function ArtisanDetail() {
   const { id } = useParams();
@@ -42,6 +43,10 @@ export default function ArtisanDetail() {
   if (loading) {
     return (
       <main className="artisan-page container py-5">
+        <Seo
+          title="Fiche artisan — Trouve ton artisan"
+          description="Chargement de la fiche détaillée de cet artisan de la région Auvergne-Rhône-Alpes."
+        />
         <p>Chargement de la fiche artisan…</p>
       </main>
     );
@@ -50,6 +55,10 @@ export default function ArtisanDetail() {
   if (hasError || !artisan) {
     return (
       <main className="artisan-page container py-5">
+        <Seo
+          title="Fiche artisan indisponible — Trouve ton artisan"
+          description="La fiche de cet artisan est actuellement indisponible sur le site Trouve ton artisan."
+        />
         <p className="text-danger">
           Impossible de charger la fiche de cet artisan.
         </p>
@@ -173,8 +182,19 @@ export default function ArtisanDetail() {
     }
   };
 
+    const pageTitle = entreprise
+      ? `${entreprise} — ${specialite || "Artisan"}${ville ? ` à ${ville}` : ""} | Trouve ton artisan`
+      : "Fiche artisan — Trouve ton artisan";
+
+    const pageDescription =
+      specialite || ville
+        ? `Découvrez ${entreprise} (${specialite || "artisan"}${ville ? ` à ${ville}` : ""}) en Auvergne-Rhône-Alpes : présentation, coordonnées et formulaire de contact.`
+        : `Consultez la fiche détaillée de cet artisan de la région Auvergne-Rhône-Alpes et contactez-le facilement depuis le site Trouve ton artisan.`;
+
+
   return (
     <main className="artisan-page">
+      <Seo title={pageTitle} description={pageDescription} />
       <div className="container">
         <header className="artisan-header mb-4">
           <div>
