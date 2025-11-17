@@ -1,4 +1,3 @@
-// controllers/artisans.controller.js
 const artisansService = require("../services/artisans.service");
 
 exports.getArtisans = async (req, res) => {

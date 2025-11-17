@@ -9,7 +9,7 @@ async function startServer() {
     await sequelize.authenticate();
     console.log("✅ Connexion à la base MySQL réussie");
 
-    // On ne fait PAS de sequelize.sync() ici pour ne pas modifier le schéma existant
+    // La structure de la base est gérée par les scripts SQL (pas de sync automatique ici).
     app.listen(PORT, () => {
       console.log(`API Trouve ton artisan démarrée sur http://localhost:${PORT}`);
     });

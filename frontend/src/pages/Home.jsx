@@ -9,6 +9,11 @@ export default function Home() {
   const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
+    /**
+     * Charge jusqu'à trois "artisans du mois" :
+     * - priorité aux artisans marqués top
+     * - complété si besoin par d'autres artisans.
+     */
     async function loadArtisans() {
       try {
         setLoading(true);

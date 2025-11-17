@@ -1,5 +1,3 @@
-// src/services/api.js
-
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 async function fetchJson(path, options = {}) {
@@ -20,7 +18,7 @@ async function fetchJson(path, options = {}) {
   return response.json();
 }
 
-// Liste des artisans avec filtres SERVEUR (catégorie / spécialité uniquement)
+// Récupère la liste des artisans avec filtres éventuels (top, pagination…).
 export async function getArtisans(filters = {}) {
   const params = new URLSearchParams();
 
@@ -64,7 +62,7 @@ export async function getArtisans(filters = {}) {
   return [];
 }
 
-// Détail d'un artisan
+// Récupère le détail d'un artisan par son identifiant.
 export async function getArtisanById(id) {
   const response = await fetch(`${API_BASE_URL}/artisans/${id}`);
 
@@ -75,7 +73,7 @@ export async function getArtisanById(id) {
   return await response.json();
 }
 
-// Liste des catégories
+// Récupère la liste des catégories d'artisans.
 export async function getCategories() {
   const result = await fetchJson("/categories");
 
@@ -94,7 +92,7 @@ export async function getCategories() {
   return [];
 }
 
-// Liste contact
+// Envoie un message via le formulaire de contact.
 export async function sendContactMessage(form) {
   const payload = {
     nom_expediteur:

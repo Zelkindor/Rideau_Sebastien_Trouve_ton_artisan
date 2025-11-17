@@ -1,4 +1,3 @@
-// src/components/Seo.jsx
 import { useEffect } from "react";
 
 const SITE_NAME = "Trouve ton artisan";

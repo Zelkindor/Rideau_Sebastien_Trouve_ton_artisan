@@ -1,4 +1,3 @@
-// src/pages/NotFound.jsx
 import { Link } from "react-router-dom";
 import image404 from "../assets/image_404.png";
 import Seo from "../components/Seo";

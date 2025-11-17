@@ -1,4 +1,3 @@
-// services/contact.service.js
 const nodemailer = require("nodemailer");
 const { MessageContact } = require("../models");
 
@@ -22,6 +21,7 @@ const transporter = nodemailer.createTransport({
   }
 });
 
+// Enregistre un message de contact et tente un envoi par email.
 exports.createContactMessage = async (payload) => {
   const {
     nom_expediteur,
@@ -42,7 +42,7 @@ exports.createContactMessage = async (payload) => {
     id_categorie
   });
 
-  // 2. Envoi d'email (best-effort : si ça casse, on ne fait pas échouer la création)
+  // 2. Envoi d'email de notification
   if (CONTACT_RECIPIENT && MAIL_HOST && MAIL_USER && MAIL_PASS) {
     const subject = "Nouveau message de contact - Trouve ton artisan";
     const text = `

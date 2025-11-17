@@ -1,8 +1,5 @@
-// api/src/models/index.js
-
 const sequelize = require("../config/database");
 
-// On importe les modèles déjà configurés
 const Categorie = require("./Categorie");
 const Specialite = require("./Specialite");
 const Artisan = require("./Artisan");
@@ -52,8 +49,7 @@ MessageContact.belongsTo(Artisan, {
   as: "artisan",
 });
 
-// (optionnel : si tu veux lier les messages à categorie / specialite,
-// tu peux les laisser, sinon tu peux les commenter)
+// messages éventuellement liés à une spécialité / catégorie
 Specialite.hasMany(MessageContact, {
   foreignKey: "id_specialite",
   as: "messages_par_specialite",
@@ -71,10 +67,6 @@ MessageContact.belongsTo(Categorie, {
   foreignKey: "id_categorie",
   as: "categorie",
 });
-
-// =========================
-// Export des modèles + sequelize
-// =========================
 
 module.exports = {
   sequelize,

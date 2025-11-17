@@ -1,4 +1,3 @@
-// src/pages/ArtisanDetail.jsx
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { getArtisanById, sendContactMessage } from "../services/api";
@@ -129,6 +128,7 @@ export default function ArtisanDetail() {
 
   const artisanId = artisan.id_artisan ?? artisan.id ?? id;
 
+  //Soumet le formulaire de contact lié à cet artisan.
   const handleContactSubmit = async (event) => {
     event.preventDefault();
 
