@@ -28,25 +28,31 @@ async function sendContactEmail({ artisan, payload }) {
     `${artisan?.prenom ?? ""} ${artisan?.nom ?? ""}`.trim()) ||
   "un artisan";
 
-  const subject = `Nouveau message pour ${artisanName}`;
+  const objet = (payload.objet || "").trim();
+  const subjectBase = objet || "Nouveau message";
+  const subject = `[Trouve ton artisan] ${subjectBase} — ${artisanName}`;
   const plainText = `
-Vous avez reçu un nouveau message via la plateforme "Trouve ton artisan".
+  Vous avez reçu un nouveau message via la plateforme "Trouve ton artisan".
 
-Artisan concerné : ${artisanName}
-Nom du demandeur : ${payload.prenom} ${payload.nom}
-Email du demandeur : ${payload.email}
+  Artisan concerné : ${artisanName}
+  Nom du demandeur : ${payload.prenom} ${payload.nom}
+  Email du demandeur : ${payload.email}
+  Objet : ${objet || "—"}
 
-Message :
-${payload.message}
+  Message :
+  ${payload.message}
 
-Merci de répondre au demandeur sous 48h.
+  Merci de répondre au demandeur sous 48h.
   `.trim();
 
   const html = `
     <p>Vous avez reçu un nouveau message via la plateforme <strong>« Trouve ton artisan »</strong>.</p>
     <p><strong>Artisan concerné :</strong> ${artisanName}</p>
-    <p><strong>Demandeur :</strong> ${payload.prenom} ${payload.nom}<br>
-    <strong>Email :</strong> <a href="mailto:${payload.email}">${payload.email}</a></p>
+    <p>
+      <strong>Demandeur :</strong> ${payload.prenom} ${payload.nom}<br>
+      <strong>Email :</strong> <a href="mailto:${payload.email}">${payload.email}</a><br>
+      <strong>Objet :</strong> ${objet || "—"}
+    </p>
     <p><strong>Message :</strong></p>
     <p>${payload.message.replace(/\n/g, "<br>")}</p>
     <p>Merci de répondre au demandeur sous 48h.</p>

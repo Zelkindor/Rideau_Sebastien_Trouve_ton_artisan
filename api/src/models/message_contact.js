@@ -26,6 +26,12 @@ const MessageContact = sequelize.define(
       },
     },
 
+    // Objet du message
+    objet: {
+      type: DataTypes.STRING(255),
+      allowNull: false,
+    },
+
     // Contenu complet du message
     contenu_message: {
       type: DataTypes.TEXT,

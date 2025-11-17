@@ -14,6 +14,7 @@ export default function Contact() {
   const [prenom, setPrenom] = useState("");
   const [nom, setNom] = useState("");
   const [email, setEmail] = useState("");
+  const [objet, setObjet] = useState("");
   const [message, setMessage] = useState("");
 
   const [sending, setSending] = useState(false);
@@ -52,9 +53,10 @@ export default function Contact() {
     const trimmedPrenom = prenom.trim();
     const trimmedNom = nom.trim();
     const trimmedEmail = email.trim();
+    const trimmedObjet = objet.trim();
     const trimmedMessage = message.trim();
 
-    if (!trimmedPrenom || !trimmedNom || !trimmedEmail || !trimmedMessage) {
+    if (!trimmedPrenom || !trimmedNom || !trimmedEmail || !trimmedObjet || !trimmedMessage) {
       setSendError("Merci de remplir tous les champs obligatoires.");
       return;
     }
@@ -66,6 +68,7 @@ export default function Contact() {
         prenom: trimmedPrenom,
         nom: trimmedNom,
         email: trimmedEmail,
+        objet: trimmedObjet,
         message: trimmedMessage,
       };
 
@@ -81,6 +84,7 @@ export default function Contact() {
       setPrenom("");
       setNom("");
       setEmail("");
+      setObjet("");
       setMessage("");
     } catch (error) {
       console.error("Erreur envoi contact :", error);
@@ -154,6 +158,20 @@ export default function Contact() {
                     className="form-control"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                </div>
+
+                <div className="col-12">
+                  <label htmlFor="contact-objet" className="form-label">
+                    Objet *
+                  </label>
+                  <input
+                    id="contact-objet"
+                    type="text"
+                    className="form-control"
+                    value={objet}
+                    onChange={(e) => setObjet(e.target.value)}
                     required
                   />
                 </div>

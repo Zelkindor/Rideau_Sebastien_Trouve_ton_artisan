@@ -55,6 +55,15 @@ exports.createContactMessage = async (req, res) => {
       .toString()
       .trim();
 
+    // Objet : le front envoie objet
+    let objet = (
+      body.objet ??
+      body.subject ??
+      ""
+    )
+      .toString()
+      .trim();
+
     // Message : le front envoie contenu_message
     let message = (
       body.contenu_message ??
@@ -73,21 +82,29 @@ exports.createContactMessage = async (req, res) => {
       prenom,
       nom,
       email,
+      objet,
       message,
       id_artisan,
     });
 
     // ====== VALIDATION BASIQUE ======
 
-    if (!prenom || !nom || !email || !message) {
+    if (!prenom || !nom || !email || !objet || !message) {
       return res.status(400).json({
-        error: "Les champs prénom, nom, email et message sont obligatoires.",
+        error:
+          "Les champs prénom, nom, email, objet et message sont obligatoires.",
       });
     }
 
     if (!isValidEmail(email)) {
       return res.status(400).json({
         error: "L'adresse email n'est pas valide.",
+      });
+    }
+
+    if (objet.length < 3 || objet.length > 255) {
+      return res.status(400).json({
+        error: "L'objet doit contenir entre 3 et 255 caractères.",
       });
     }
 
@@ -116,6 +133,7 @@ exports.createContactMessage = async (req, res) => {
       nom_expediteur: `${prenom} ${nom}`.trim(),
 
       email_expediteur: email,
+      objet,
       contenu_message: message,
 
       id_artisan: artisan ? artisan.id_artisan ?? artisan.id : null,
@@ -128,7 +146,7 @@ exports.createContactMessage = async (req, res) => {
     try {
       await sendContactEmail({
         artisan,
-        payload: { prenom, nom, email, message },
+        payload: { prenom, nom, email, objet, message },
       });
     } catch (mailError) {
       console.error("Erreur durant l'envoi du mail de contact :", mailError);
