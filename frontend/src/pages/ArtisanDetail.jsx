@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { getArtisanById, sendContactMessage } from "../services/api";
-import Logo from "../assets/Logo.png";
+import ArtisanImage from "../assets/image_artisan.png";
 
 export default function ArtisanDetail() {
   const { id } = useParams();
@@ -64,6 +64,8 @@ export default function ArtisanDetail() {
     (artisan.prenom || artisan.nom
       ? `${artisan.prenom ?? ""} ${artisan.nom ?? ""}`.trim()
       : "Artisan");
+
+  const imageAlt = `Portrait de l'artisan ${entreprise}`;
 
   const ville = artisan.ville ?? "";
   const adresse = artisan.adresse ?? "";
@@ -210,9 +212,10 @@ export default function ArtisanDetail() {
         <section className="artisan-layout">
           <div className="artisan-main">
             <img
-              src={Logo}
-              alt={`Illustration pour ${entreprise}`}
+              src={ArtisanImage}
+              alt={imageAlt}
               className="artisan-image"
+              loading="lazy"
             />
 
             <h2 className="artisan-section-title">
