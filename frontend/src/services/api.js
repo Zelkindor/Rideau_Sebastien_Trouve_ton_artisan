@@ -32,6 +32,18 @@ export async function getArtisans(filters = {}) {
     params.append("specialiteId", filters.specialiteId);
   }
 
+  if (filters.top !== undefined && filters.top !== null) {
+    params.append("top", String(filters.top));
+  }
+
+  if (filters.page !== undefined && filters.page !== null) {
+    params.append("page", String(filters.page));
+  }
+
+  if (filters.limit !== undefined && filters.limit !== null) {
+    params.append("limit", String(filters.limit));
+  }
+
   const queryString = params.toString();
   const path = queryString ? `/artisans?${queryString}` : "/artisans";
 
