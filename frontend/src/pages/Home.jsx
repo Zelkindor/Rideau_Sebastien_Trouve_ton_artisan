@@ -17,27 +17,30 @@ export default function Home() {
         setLoading(true);
         setHasError(false);
 
-        const data = await getArtisans();
-        const all = Array.isArray(data) ? data : [];
+        // On commence par demander à l’API uniquement les artisans "top"
+        const topsFromApi = await getArtisans({ top: 1, limit: 3 });
+        let finalList = Array.isArray(topsFromApi) ? [...topsFromApi] : [];
 
-        const tops = all.filter(
-          (a) => a?.top === true || a?.top === 1 || a?.top === "1"
-        );
+        // Si on a moins de 3 artisans top, on complète avec d'autres artisans
+        if (finalList.length < 3) {
+          const othersFromApi = await getArtisans({ limit: 3 });
 
-        let list = all;
+          const others = Array.isArray(othersFromApi) ? othersFromApi : [];
 
-        if (tops.length > 0) {
-          let finalList = [...tops];
+          const getId = (a) => a?.id_artisan ?? a?.id;
 
-          if (finalList.length < 3) {
-            const remaining = all.filter((a) => !tops.includes(a));
-            finalList = finalList.concat(remaining.slice(0, 3 - finalList.length));
-          }
+          // On enlève ceux déjà présents dans la liste top
+          const remaining = others.filter(
+            (a) => !finalList.some((t) => getId(t) === getId(a))
+          );
 
-          list = finalList;
+          finalList = finalList.concat(
+            remaining.slice(0, 3 - finalList.length)
+          );
         }
 
-        setArtisans(list.slice(0, 3));
+        // On s'assure de n'afficher que 3 artisans max
+        setArtisans(finalList.slice(0, 3));
       } catch (error) {
         console.error("Erreur chargement artisans du mois :", error);
         setHasError(true);
