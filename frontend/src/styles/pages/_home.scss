@@ -1,0 +1,119 @@
+/* ========================= */
+/* HOME */
+/* ========================= */
+
+.home-page {
+  padding-top: 2.5rem;
+  padding-bottom: 3rem;
+}
+
+/* bloc "Comment trouver mon artisan ?" */
+.home-how {
+  padding-bottom: 3rem;
+}
+
+.home-how-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--r-aura-blue-dark);
+}
+
+.home-how-steps {
+  margin-top: 1rem;
+}
+
+.home-how-step {
+  background: #fff;
+  box-shadow: var(--shadow-soft);
+  border-radius: var(--radius-lg);
+  padding: 1rem 1.1rem;
+  font-size: 0.95rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  text-align: left;
+}
+
+.home-how-step-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.8rem;
+  height: 1.8rem;
+  margin-right: 0.5rem;
+  border-radius: 999px;
+  background: var(--r-aura-blue);
+  color: #fff;
+  font-weight: 700;
+}
+
+/* bloc "Artisans du mois" */
+.home-featured {
+  padding: 3rem 0 1rem;
+}
+
+.home-section-divider {
+  width: 80px;
+  height: 4px;
+  border-radius: 999px;
+  margin: 0 auto;
+  background: var(--r-aura-blue);
+}
+
+.home-section-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--r-aura-grey-dark);
+}
+
+/* cartes artisans */
+.home-artisan-card {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  padding: 1.5rem 1.2rem;
+  box-shadow: var(--shadow-soft);
+}
+
+.home-artisan-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--r-aura-blue-dark);
+}
+
+.home-artisan-stars {
+  letter-spacing: 0.15em;
+  font-size: 1.1rem;
+  color: var(--r-aura-green);
+}
+
+.home-artisan-specialite {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--r-aura-grey-dark);
+}
+
+.home-artisan-ville {
+  font-size: 0.9rem;
+  color: rgba(56, 64, 80, 0.85);
+}
+
+.home-artisan-btn {
+  background: var(--r-aura-blue);
+  color: #fff;
+  border-radius: 999px;
+  padding-inline: 1.4rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.home-artisan-btn:hover {
+  background: var(--r-aura-blue-dark);
+  color: #fff;
+}
+
+/* RESPONSIVE HOME */
+@media (max-width: 767.98px) {
+  .home-how-step {
+    font-size: 0.9rem;
+  }
+}

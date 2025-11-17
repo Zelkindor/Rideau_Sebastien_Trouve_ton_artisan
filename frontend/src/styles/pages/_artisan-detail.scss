@@ -1,0 +1,158 @@
+/* ========================= */
+/* FICHE ARTISAN */
+/* ========================= */
+
+.artisan-page {
+  padding: 2.5rem 0 3rem;
+  background: var(--r-aura-light);
+}
+
+.artisan-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+
+.artisan-title {
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: var(--r-aura-blue-dark);
+  margin-bottom: 0.25rem;
+}
+
+.artisan-specialite {
+  margin: 0;
+  font-weight: 500;
+  color: var(--r-aura-blue);
+}
+
+.artisan-ville {
+  margin: 0.1rem 0 0;
+  color: rgba(56, 64, 80, 0.85);
+}
+
+/* note sur la fiche artisan */
+.artisan-note {
+  margin-top: 0.4rem;
+}
+
+.artisan-note-stars {
+  color: var(--r-aura-green);
+  font-size: 1.1rem;
+  letter-spacing: 0.15em;
+}
+
+.artisan-note-text {
+  margin: 0.1rem 0 0;
+  font-size: 0.9rem;
+  color: rgba(56, 64, 80, 0.85);
+}
+
+/* image de la fiche artisan */
+.artisan-image {
+  display: block;
+  max-width: 180px;
+  border-radius: 1rem;
+  margin-bottom: 1.2rem;
+}
+
+.artisan-header-actions {
+  display: flex;
+  align-items: center;
+}
+
+.artisan-back-btn {
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.35rem 1.1rem;
+}
+
+.artisan-back-btn:hover {
+  background: var(--r-aura-light);
+}
+
+/* layout */
+.artisan-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1.2fr);
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.artisan-section-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--r-aura-grey-dark);
+}
+
+.artisan-description {
+  background: #ffffff;
+  border-radius: 1rem;
+  padding: 1.4rem 1.3rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* aside contact */
+.artisan-contact-form {
+  margin-top: 0.5rem;
+}
+
+.artisan-contact-form .form-label {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.artisan-contact-form textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.artisan-contact-card {
+  background: #ffffff;
+  border-radius: 1rem;
+  padding: 1.4rem 1.3rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+}
+
+.artisan-contact-line {
+  margin: 0 0 0.4rem;
+  font-size: 0.95rem;
+}
+
+.artisan-contact-label {
+  font-weight: 600;
+}
+
+.artisan-contact-btn {
+  background: var(--r-aura-blue);
+  color: #ffffff;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding-inline: 1.4rem;
+  margin-top: 1rem;
+}
+
+.artisan-contact-btn:hover {
+  background: var(--r-aura-blue-dark);
+  color: #ffffff;
+}
+
+/* RESPONSIVE FICHE ARTISAN */
+@media (max-width: 767.98px) {
+  .artisan-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .artisan-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

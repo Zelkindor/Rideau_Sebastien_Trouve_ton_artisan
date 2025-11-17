@@ -1,0 +1,29 @@
+/* ========================= */
+/* PAGE 404 */
+/* ========================= */
+
+.notfound-page h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--r-aura-blue-dark);
+}
+
+.notfound-logo {
+  height: 80px;
+  width: auto;
+  object-fit: contain;
+}
+
+.notfound-btn {
+  background: var(--r-aura-blue);
+  color: #ffffff;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding-inline: 1.8rem;
+}
+
+.notfound-btn:hover {
+  background: var(--r-aura-blue-dark);
+  color: #ffffff;
+}
