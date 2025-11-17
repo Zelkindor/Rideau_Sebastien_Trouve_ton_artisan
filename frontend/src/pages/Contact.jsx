@@ -1,4 +1,3 @@
-// src/pages/Contact.jsx
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { getArtisanById, sendContactMessage } from "../services/api";

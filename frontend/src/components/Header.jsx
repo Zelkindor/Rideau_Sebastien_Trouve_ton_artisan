@@ -1,4 +1,3 @@
-// src/components/Header.jsx
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { getCategories, getArtisans } from "../services/api";

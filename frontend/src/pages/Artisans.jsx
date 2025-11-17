@@ -1,4 +1,3 @@
-// src/pages/Artisans.jsx
 import { useEffect, useState, useMemo } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { getArtisans, getCategories } from "../services/api";

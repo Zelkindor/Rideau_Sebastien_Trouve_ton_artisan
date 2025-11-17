@@ -1,5 +1,3 @@
--- script_creation.sql
-
 -- Création de la base de données
 CREATE DATABASE IF NOT EXISTS trouve_ton_artisan
   CHARACTER SET utf8mb4

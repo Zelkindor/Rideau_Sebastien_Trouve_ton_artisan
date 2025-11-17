@@ -1,4 +1,3 @@
-// api/src/controllers/contact.controller.js
 const { MessageContact, Artisan } = require("../models");
 const { sendContactEmail } = require("../services/mailService");
 

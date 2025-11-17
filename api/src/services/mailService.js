@@ -1,4 +1,3 @@
-// api/services/mailService.js
 const nodemailer = require("nodemailer");
 
 console.log("[MAILTRAP] host =", process.env.MAILTRAP_HOST);
@@ -19,7 +18,7 @@ async function sendContactEmail({ artisan, payload }) {
     process.env.MAILTRAP_FROM || '"Trouve ton artisan" <no-reply@trouvetonartisan.fr>';
 
   // Si l'artisan a un email, on lui envoie directement.
-  // Sinon on envoie sur une adresse de secours (ex: équipe support).
+  // Sinon on envoie sur une adresse de secours.
   const toEmail =
     artisan?.email || process.env.MAILTRAP_FALLBACK_TO || process.env.MAILTRAP_FROM;
 

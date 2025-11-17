@@ -1,5 +1,3 @@
--- script_insertion.sql
-
 USE trouve_ton_artisan;
 
 -- Insertion des catégories

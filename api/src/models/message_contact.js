@@ -1,4 +1,3 @@
-// api/src/models/message_contact.js
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/database");
 
@@ -38,7 +37,7 @@ const MessageContact = sequelize.define(
       allowNull: false,
     },
 
-    // Liens éventuels (suivant ta BDD)
+    // Liens éventuels vers l’artisan, la spécialité ou la catégorie
     id_artisan: {
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: true,
