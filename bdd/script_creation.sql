@@ -72,6 +72,7 @@ CREATE TABLE message_contact (
   id_message INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   nom_expediteur VARCHAR(150) NOT NULL,
   email_expediteur VARCHAR(255) NOT NULL,
+  objet VARCHAR(255) NOT NULL,
   contenu_message TEXT NOT NULL,
   id_artisan INT UNSIGNED NULL,
   id_specialite INT UNSIGNED NULL,

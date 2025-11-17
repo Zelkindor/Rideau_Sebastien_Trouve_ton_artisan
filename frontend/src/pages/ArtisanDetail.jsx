@@ -14,6 +14,7 @@ export default function ArtisanDetail() {
   const [prenom, setPrenom] = useState("");
   const [nom, setNom] = useState("");
   const [emailContact, setEmailContact] = useState("");
+  const [objet, setObjet] = useState("");
   const [message, setMessage] = useState("");
   const [sending, setSending] = useState(false);
   const [sendError, setSendError] = useState("");
@@ -128,9 +129,10 @@ export default function ArtisanDetail() {
     const trimmedPrenom = prenom.trim();
     const trimmedNom = nom.trim();
     const trimmedEmail = emailContact.trim();
+    const trimmedObjet = objet.trim();
     const trimmedMessage = message.trim();
 
-    if (!trimmedPrenom || !trimmedNom || !trimmedEmail || !trimmedMessage) {
+    if (!trimmedPrenom || !trimmedNom || !trimmedEmail || !trimmedObjet || !trimmedMessage) {
       setSendError("Merci de remplir tous les champs obligatoires.");
       return;
     }
@@ -142,6 +144,7 @@ export default function ArtisanDetail() {
         prenom: trimmedPrenom,
         nom: trimmedNom,
         email: trimmedEmail,
+        objet: trimmedObjet,
         message: trimmedMessage,
       };
 
@@ -155,6 +158,7 @@ export default function ArtisanDetail() {
       setPrenom("");
       setNom("");
       setEmailContact("");
+      setObjet("");
       setMessage("");
     } catch (error) {
       console.error(
@@ -329,6 +333,23 @@ export default function ArtisanDetail() {
                     className="form-control"
                     value={emailContact}
                     onChange={(e) => setEmailContact(e.target.value)}
+                    required
+                  />
+                </div>
+
+                <div className="mb-2">
+                  <label
+                    htmlFor="artisan-contact-objet"
+                    className="form-label"
+                  >
+                    Objet *
+                  </label>
+                  <input
+                    id="artisan-contact-objet"
+                    type="text"
+                    className="form-control"
+                    value={objet}
+                    onChange={(e) => setObjet(e.target.value)}
                     required
                   />
                 </div>

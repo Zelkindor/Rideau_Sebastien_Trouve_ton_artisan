@@ -91,6 +91,8 @@ export async function sendContactMessage(form) {
 
     email_expediteur: form.email_expediteur ?? form.email ?? "",
 
+    objet: form.objet ?? form.subject ?? "",
+
     contenu_message:
       form.contenu_message ??
       form.message ??
