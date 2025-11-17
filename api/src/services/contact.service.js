@@ -2,11 +2,15 @@
 const nodemailer = require("nodemailer");
 const { MessageContact } = require("../models");
 
-const MAIL_HOST = process.env.MAIL_HOST;
-const MAIL_PORT = parseInt(process.env.MAIL_PORT || "2525", 10);
-const MAIL_USER = process.env.MAIL_USER;
-const MAIL_PASS = process.env.MAIL_PASS;
-const CONTACT_RECIPIENT = process.env.CONTACT_RECIPIENT || MAIL_USER;
+const MAIL_HOST = process.env.MAILTRAP_HOST;
+const MAIL_PORT = parseInt(process.env.MAILTRAP_PORT || "2525", 10);
+const MAIL_USER = process.env.MAILTRAP_USER;
+const MAIL_PASS = process.env.MAILTRAP_PASS;
+
+const CONTACT_RECIPIENT =
+  process.env.MAILTRAP_FALLBACK_TO ||
+  process.env.MAILTRAP_FROM ||
+  MAIL_USER;
 
 // Transporter Mailtrap
 const transporter = nodemailer.createTransport({
