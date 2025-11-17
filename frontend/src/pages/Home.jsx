@@ -1,15 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getArtisans } from "../services/api";
+import Seo from "../components/Seo";
 
 export default function Home() {
   const [artisans, setArtisans] = useState([]);
   const [loading, setLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
-
-  useEffect(() => {
-    document.title = "Trouve ton artisan - Accueil";
-  }, []);
 
   useEffect(() => {
     async function loadArtisans() {
@@ -139,6 +136,10 @@ export default function Home() {
 
   return (
     <div className="home-page">
+      <Seo
+        title="Trouve ton artisan — Accueil"
+        description="Trouvez facilement un artisan de confiance en Auvergne-Rhône-Alpes : découvrez les artisans du mois, filtrez par métier et contactez-les en quelques clics."
+      />
       <section className="home-how">
         <div className="container text-center">
           <h1 className="home-how-title mb-5">

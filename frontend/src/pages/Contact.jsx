@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { getArtisanById, sendContactMessage } from "../services/api";
+import Seo from "../components/Seo";
 
 export default function Contact() {
   const location = useLocation();
@@ -20,10 +21,6 @@ export default function Contact() {
   const [sending, setSending] = useState(false);
   const [sendError, setSendError] = useState("");
   const [sendSuccess, setSendSuccess] = useState(false);
-
-  useEffect(() => {
-    document.title = "Contact — Trouve ton artisan";
-  }, []);
 
   useEffect(() => {
     async function loadArtisan() {
@@ -103,6 +100,10 @@ export default function Contact() {
 
   return (
     <main className="contact-page">
+      <Seo
+        title="Contact — Trouve ton artisan"
+        description="Envoyez un message à un artisan ou à l'équipe Trouve ton artisan grâce à ce formulaire de contact."
+      />
       <div className="container">
         <header className="contact-header mb-4">
           <h1 className="contact-title">Contact</h1>

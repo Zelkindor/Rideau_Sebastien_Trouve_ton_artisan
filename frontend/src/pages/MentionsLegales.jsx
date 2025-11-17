@@ -1,12 +1,12 @@
-import { useEffect } from "react";
+import Seo from "../components/Seo";
 
 export default function MentionsLegales() {
-  useEffect(() => {
-    document.title = "Mentions légales — Trouve ton artisan";
-  }, []);
-
   return (
     <main className="legal-page" aria-labelledby="legal-title">
+      <Seo
+        title="Mentions légales — Trouve ton artisan"
+        description="Mentions légales du site Trouve ton artisan pour la région Auvergne-Rhône-Alpes. Contenu provisoire en attente de validation."
+      />
       <div className="container py-5">
         <h1 id="legal-title" className="mb-4">Mentions légales</h1>
         <p>

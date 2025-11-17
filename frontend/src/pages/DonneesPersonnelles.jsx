@@ -1,12 +1,12 @@
-import { useEffect } from "react";
+import Seo from "../components/Seo";
 
 export default function DonneesPersonnelles() {
-  useEffect(() => {
-    document.title = "Données personnelles — Trouve ton artisan";
-  }, []);
-
   return (
     <main className="legal-page" aria-labelledby="legal-title">
+      <Seo
+        title="Données personnelles — Trouve ton artisan"
+        description="Informations sur le traitement des données personnelles sur le site Trouve ton artisan. Contenu provisoire en attente de rédaction définitive."
+      />
       <div className="container py-5">
         <h1 id="legal-title" className="mb-4">Données personnelles</h1>
         <p>
