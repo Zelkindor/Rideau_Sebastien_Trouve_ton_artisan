@@ -31,7 +31,6 @@ export default function Home() {
 
           const getId = (a) => a?.id_artisan ?? a?.id;
 
-          // On enlève ceux déjà présents dans la liste top
           const remaining = others.filter(
             (a) => !finalList.some((t) => getId(t) === getId(a))
           );
