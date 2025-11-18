@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import logo from "../assets/logo.png"; // même logo que dans le header
+import logo from "../assets/Logo.png"; // même logo que dans le header
 
 export default function Footer() {
   const year = new Date().getFullYear();
