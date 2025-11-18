@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { getCategories, getArtisans } from "../services/api";
-import logo from "../assets/logo.png";
+import logo from "../assets/Logo.png";
 
 export default function Header() {
   const [categories, setCategories] = useState([]);
