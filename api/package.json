@@ -2,14 +2,15 @@
   "name": "trouve-ton-artisan-api",
   "version": "1.0.0",
   "main": "src/server.js",
+  "type": "commonjs",
   "scripts": {
     "dev": "nodemon src/server.js",
-    "start": "node src/server.js"
+    "start": "node src/server.js",
+    "convert:excel": "node scripts/convertExcelToJson.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
@@ -19,7 +20,8 @@
     "mysql2": "^3.15.3",
     "nodemailer": "^7.0.10",
     "sequelize": "^6.37.7",
-    "sqlite3": "^5.1.7"
+    "sqlite3": "^5.1.7",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "nodemon": "^3.1.11"
